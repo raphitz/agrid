@@ -296,7 +296,7 @@ module.controller("exampleCtrl", function($scope, $filter) {
             pending_view: $scope.pendingView
         },
         ready: function(api) {
-            //api.setDatasource(data);
+            api.setDatasource(data);
             //api.sizeColumnsToFit();
         }
     };
