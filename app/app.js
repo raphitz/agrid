@@ -2,7 +2,7 @@
 var module = angular.module("example", ["angularGrid"]);
 
 module.controller("exampleCtrl", function($scope, $filter) {
-    $scope.pendingView = true;
+    $scope.pendingView = false;
 
     var columnDefs = [
         {
@@ -285,7 +285,7 @@ module.controller("exampleCtrl", function($scope, $filter) {
     $scope.gridOptions = {
         angularCompileRows: true,
         angularCompileHeaders: true,
-        rowData: data,
+        //rowData: data,
         columnDefs: columnDefs,
         colWidth: 100,
         groupHeaders: true,
@@ -296,7 +296,7 @@ module.controller("exampleCtrl", function($scope, $filter) {
             pending_view: $scope.pendingView
         },
         ready: function(api) {
-            api.setDatasource(data);
+            api.setRows(data);
             //api.sizeColumnsToFit();
         }
     };
@@ -314,26 +314,22 @@ module.controller("exampleCtrl", function($scope, $filter) {
         var ds = [];
         if(state) {
             ds = _.sortByAll(collection, ['need_vote', 'has_comment', 'is_stale', 'is_watched', 'disbursement_issue', 'name']).reverse();
-            if($scope.gridOptions) {
-                $scope.gridOptions.api.setDatasource(ds);
-            }
+            //console.log('true', ds);
             return ds;
         } else {
             ds = _.sortByAll(collection, ['name']).reverse();
-            if($scope.gridOptions) {
-                $scope.gridOptions.api.setDatasource(ds);
-            }
+            //console.log('false', ds);
             return ds;
         }
     }
     function sortPending() {
         var PVUE = $scope.gridOptions.context.pending_view;
         //alert(PVUE);
-        $scope.gridOptions.rowData = getSortedData(PVUE, unsorted);
+        $scope.gridOptions.api.setRows = getSortedData(stated, unsorted);
         PVUE = !PVUE;
         $scope.gridOptions.api.refreshView();
         $scope.gridOptions.api.refreshHeader();
-        //return PVUE;
+        return PVUE;
     }
     function numberNewValueHandler(params) {
         var valueAsNumber = parseInt(params.newValue);
