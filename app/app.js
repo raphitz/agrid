@@ -2,7 +2,7 @@
 var module = angular.module("example", ["angularGrid"]);
 
 module.controller("exampleCtrl", function($scope, $filter) {
-    $scope.pendingView = false;
+    $scope.pendingView = true;
 
     var columnDefs = [
         {
@@ -323,13 +323,13 @@ module.controller("exampleCtrl", function($scope, $filter) {
         }
     }
     function sortPending() {
-        var PVUE = $scope.gridOptions.context.pending_view;
-        //alert(PVUE);
-        $scope.gridOptions.api.setRows = getSortedData(stated, unsorted);
-        PVUE = !PVUE;
+         var newData = getSortedData($scope.gridOptions.context.pending_view, unsorted);
+        $scope.gridOptions.context.pending_view = !$scope.gridOptions.context.pending_view;
+        $scope.gridOptions.api.setRows(newData);
         $scope.gridOptions.api.refreshView();
         $scope.gridOptions.api.refreshHeader();
-        return PVUE;
+        $scope.gridOptions.api.onNewRows()
+        return $scope.gridOptions.context.pending_view;
     }
     function numberNewValueHandler(params) {
         var valueAsNumber = parseInt(params.newValue);
