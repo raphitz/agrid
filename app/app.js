@@ -323,8 +323,9 @@ module.controller("exampleCtrl", function($scope, $filter) {
         }
     }
     function sortPending() {
-         var newData = getSortedData($scope.gridOptions.context.pending_view, unsorted);
         $scope.gridOptions.context.pending_view = !$scope.gridOptions.context.pending_view;
+
+        var newData = getSortedData($scope.gridOptions.context.pending_view, unsorted);
         $scope.gridOptions.api.setRows(newData);
         $scope.gridOptions.api.refreshView();
         $scope.gridOptions.api.refreshHeader();
