@@ -1,0 +1,68 @@
+<!doctype html>
+<html ng-app="example">
+<head>
+    <meta charset="utf-8">
+    <script>document.write('<base href="' + document.location + '" />');</script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="bower_components/ag-grid/dist/angular-grid.css">
+    <link rel="stylesheet" type="text/css" href="bower_components/ag-grid/dist/theme-fresh.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <script src="js/lodash/lodash.min.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/ag-grid/dist/angular-grid.js"></script>
+    <script src="app/app.js"></script>
+</head>
+
+<style>
+    .bold-and-red {
+        color: darkred;
+        font-weight: bold;
+    }
+</style>
+
+<body ng-controller="exampleCtrl">
+<div class="row">
+    <div class="col-xs-1" ng-if="!showSidebar" id="colIcon">
+        <ul class="list-group">
+            <li class="list-group-item butt" ng-click="toggleSidebar()">
+                *
+            </li>
+            <li class="list-group-item">
+                A
+            </li>
+            <li class="list-group-item">
+                B
+            </li>
+            <li class="list-group-item">
+                C
+            </li>
+            <li class="list-group-item">
+                D
+            </li>
+        </ul>
+    </div>
+    <div ng-class="showSidebar ? 'col-xs-2' : 'hidden'" id="colPush" >
+        <ul class="list-group" style="padding:0;width:100%;">
+            <li class="list-group-item butt" ng-click="toggleSidebar()">
+                *
+            </li>
+            <li class="list-group-item">
+                A Aardvark
+            </li>
+            <li class="list-group-item">
+                B Buffalo
+            </li>
+            <li class="list-group-item">
+                C Cougar
+            </li>
+            <li class="list-group-item">
+                D Dog
+            </li>
+        </ul>
+    </div>
+    <div ng-class="showSidebar ? 'col-xs-10' : 'col-xs-11'"  id="colMain" style="margin-left: -60px;" >
+        <div style="height: 90%;" ag-grid="gridOptions" class="ag-fresh"></div>
+    </div>
+</div>
+</body>
+</html>
