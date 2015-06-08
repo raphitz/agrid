@@ -1,5 +1,8 @@
 
-var module = angular.module("example", ["angularGrid"]);
+var module = angular.module('example', [
+    'angularGrid',
+    'ui.bootstrap'
+]);
 
 module.controller("exampleCtrl", function($scope, $filter) {
     $scope.pendingView = true;
@@ -208,7 +211,7 @@ module.controller("exampleCtrl", function($scope, $filter) {
             is_stale: false,
             is_watched: false,
             disbursement_issue: true,
-            name: 'Cinna',
+            name: 'Cinna Firestarter',
             mon: 4,
             tue: 4,
             wed: 4,
@@ -247,7 +250,7 @@ module.controller("exampleCtrl", function($scope, $filter) {
             is_stale: false,
             is_watched: false,
             disbursement_issue: false,
-            name: 'Beetee',
+            name: 'Beetee Latier',
             mon: 10,
             tue: 10,
             wed: 10,
@@ -261,6 +264,136 @@ module.controller("exampleCtrl", function($scope, $filter) {
             is_watched: false,
             disbursement_issue: false,
             name: 'President Alma Coin',
+            mon: 3,
+            tue: 3,
+            wed: 3,
+            thur: 3,
+            fri: 0
+        },
+        {
+            need_vote: false,
+            has_comment: false,
+            is_stale: false,
+            is_watched: false,
+            disbursement_issue: false,
+            name: 'Rue Cleverd',
+            mon: 3,
+            tue: 3,
+            wed: 3,
+            thur: 3,
+            fri: 0
+        },
+        {
+            need_vote: false,
+            has_comment: false,
+            is_stale: false,
+            is_watched: false,
+            disbursement_issue: false,
+            name: 'Cato Malicious',
+            mon: 3,
+            tue: 3,
+            wed: 3,
+            thur: 3,
+            fri: 0
+        },
+        {
+            need_vote: false,
+            has_comment: false,
+            is_stale: false,
+            is_watched: false,
+            disbursement_issue: false,
+            name: 'Thresh Righteous',
+            mon: 3,
+            tue: 3,
+            wed: 3,
+            thur: 3,
+            fri: 0
+        },
+        {
+            need_vote: false,
+            has_comment: false,
+            is_stale: false,
+            is_watched: false,
+            disbursement_issue: false,
+            name: 'Clove Nifer',
+            mon: 3,
+            tue: 3,
+            wed: 3,
+            thur: 3,
+            fri: 0
+        },
+        {
+            need_vote: false,
+            has_comment: false,
+            is_stale: false,
+            is_watched: false,
+            disbursement_issue: false,
+            name: 'Seneca Crane',
+            mon: 3,
+            tue: 3,
+            wed: 3,
+            thur: 3,
+            fri: 0
+        },
+        {
+            need_vote: false,
+            has_comment: false,
+            is_stale: false,
+            is_watched: false,
+            disbursement_issue: false,
+            name: 'Marvel Arroger',
+            mon: 3,
+            tue: 3,
+            wed: 3,
+            thur: 3,
+            fri: 0
+        },
+        {
+            need_vote: false,
+            has_comment: false,
+            is_stale: false,
+            is_watched: false,
+            disbursement_issue: false,
+            name: 'Mags Mentor',
+            mon: 3,
+            tue: 3,
+            wed: 3,
+            thur: 3,
+            fri: 0
+        },
+        {
+            need_vote: false,
+            has_comment: false,
+            is_stale: false,
+            is_watched: false,
+            disbursement_issue: false,
+            name: 'General Boggs',
+            mon: 3,
+            tue: 3,
+            wed: 3,
+            thur: 3,
+            fri: 0
+        },
+        {
+            need_vote: false,
+            has_comment: false,
+            is_stale: false,
+            is_watched: false,
+            disbursement_issue: false,
+            name: 'Caesar Flickerman',
+            mon: 3,
+            tue: 3,
+            wed: 3,
+            thur: 3,
+            fri: 0
+        },
+        {
+            need_vote: false,
+            has_comment: false,
+            is_stale: false,
+            is_watched: false,
+            disbursement_issue: false,
+            name: 'Johanna Mason',
             mon: 3,
             tue: 3,
             wed: 3,
@@ -317,7 +450,7 @@ module.controller("exampleCtrl", function($scope, $filter) {
             //console.log('true', ds);
             return ds;
         } else {
-            ds = _.sortByAll(collection, ['name']).reverse();
+            ds = _.sortByAll(collection, ['name']);
             //console.log('false', ds);
             return ds;
         }
