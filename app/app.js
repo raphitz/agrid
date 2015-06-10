@@ -43,9 +43,11 @@ module.controller("exampleCtrl", function($scope, $filter) {
             field: 'tue',
             newValueHandler: numberNewValueHandler,
             editable: true,
-            cellClass: 'text-right',
+            cellClass: function(params) {
+                return gtZero(params.data.tue);
+            },
             cellRenderer: function(params) {
-                return $filter('number')(params.data.tue, 1);
+                return $filter('flexCurrency')(params.data.tue, 2);
             },
             cellValueChanged: cellValueChangedFunction
         },
@@ -148,7 +150,7 @@ module.controller("exampleCtrl", function($scope, $filter) {
             disbursement_issue: true,
             name: 'Primrose Everdeen',
             mon: 5, 
-            tue: 5, 
+            tue: 0,
             wed: 5, 
             thur: 5, 
             fri: 5
@@ -173,11 +175,11 @@ module.controller("exampleCtrl", function($scope, $filter) {
             is_watched: true,
             disbursement_issue: false,
             name: 'Peeta Mellark',
-            mon: 8,
-            tue: 8,
-            wed: 8,
-            thur: 8,
-            fri: 8
+            mon: 10,
+            tue: 0,
+            wed: 10,
+            thur: 10,
+            fri: 10
         },
         {
             need_vote: false,
@@ -476,5 +478,14 @@ module.controller("exampleCtrl", function($scope, $filter) {
     function cellValueChangedFunction() {
         // after a value changes, get the volatile cells to update
         $scope.gridOptions.api.softRefreshView();
+    }
+    function gtZero(value) {
+        var val = Number(value);
+        if (val <= 0) {
+            return 'text-center';
+        }
+        else {
+            return 'text-right';
+        }
     }
 });

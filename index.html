@@ -13,6 +13,7 @@
     <script src="bower_components/ag-grid/dist/angular-grid.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script src="app/app.js"></script>
+    <script src="app/filters.js"></script>
 </head>
 
 <style>
@@ -28,160 +29,167 @@
         background-color: #006837;
         font-weight: normal;
     }
+    .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover{
+        background-color: #000000;
+        border-color: #ffffff;
+    }
 </style>
 
 <body ng-controller="exampleCtrl">
-<div class="row">
-    <div class="col-xs-1" ng-if="!showSidebar" id="colIcon">
-        <ul class="list-group" style="width: 60px; text-align:center !important;">
-            <li class="list-group-item butt" ng-click="toggleSidebar()">
-                <span class="menuicon glyphicon glyphicon-option-horizontal" tooltip="Full Menu" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-            </li>
-            <li class="list-group-item">
-                <span class="menuicon glyphicon glyphicon-credit-card" tooltip="Summary" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-            </li>
-            <li class="list-group-item">
-                <span class="menuicon glyphicon glyphicon-book" tooltip="Underwriting" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-            </li>
-            <li class="list-group-item">
-                <span class="menuicon glyphicon glyphicon-lamp" tooltip="Terms" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-            </li>
-            <li class="list-group-item">
-                <span class="menuicon glyphicon glyphicon-user" tooltip="Committee" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-            </li>
-            <li class="list-group-item">
-                <span class="menuicon glyphicon glyphicon-cloud" tooltip="Comments" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-            </li>
-            <li class="list-group-item">
-                <span class="menuicon glyphicon glyphicon-star" tooltip="Applicant" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-            </li>
-            <li class="list-group-item">
-                <span class="menuicon glyphicon glyphicon-question-sign" tooltip="Questions" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-            </li>
-            <li class="list-group-item">
-                <span class="menuicon glyphicon glyphicon-globe" tooltip="References" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-            </li>
-            <li class="list-group-item">
-                <span class="menuicon glyphicon glyphicon-yen" tooltip="Financial" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-            </li>
-            <li class="list-group-item">
-                <span class="menuicon glyphicon glyphicon-grain" tooltip="Crop" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-            </li>
-            <li class="list-group-item">
-                <span class="menuicon glyphicon glyphicon-apple" tooltip="Farm" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-            </li>
-            <li class="list-group-item">
-                <span class="menuicon glyphicon glyphicon-scale" tooltip="Insurance" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-            </li>
-            <li class="list-group-item">
-                <span class="menuicon glyphicon glyphicon-piggy-bank" tooltip="Budget" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-            </li>
-            <li class="list-group-item">
-                <span class="menuicon glyphicon glyphicon-tasks" tooltip="Optimizer" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-            </li>
-            <li class="list-group-item">
-                <span class="menuicon glyphicon glyphicon-gbp" tooltip="Collateral" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-            </li>
-            <li class="list-group-item">
-                <span class="menuicon glyphicon glyphicon-paperclip" tooltip="Prerequisite" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-            </li>
-            <li class="list-group-item">
-                <span class="menuicon glyphicon glyphicon-tower" tooltip="Closing" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-            </li>
-            <li class="list-group-item">
-                <span class="menuicon glyphicon glyphicon-ice-lolly-tasted" tooltip="Disbursement" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-            </li>
-            <li class="list-group-item">
-                <span class="menuicon glyphicon glyphicon-sunglasses" tooltip="Audit" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-            </li>
-        </ul>
+    <div class="row">
+        <div class="col-xs-1" ng-if="!showSidebar" id="colIcon">
+            <ul class="list-group" style="width: 60px; text-align:center !important;">
+                <li class="list-group-item butt" ng-click="toggleSidebar()">
+                    <span class="menuicon glyphicon glyphicon-option-horizontal" tooltip="Full Menu" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                </li>
+                <li class="list-group-item active">
+                    <span class="menuicon glyphicon glyphicon-credit-card" tooltip="Summary" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                </li>
+                <li class="list-group-item">
+                    <span class="menuicon glyphicon glyphicon-book" tooltip="Underwriting" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                </li>
+                <li class="list-group-item">
+                    <span class="menuicon glyphicon glyphicon-lamp" tooltip="Terms" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                </li>
+                <li class="list-group-item">
+                    <span class="menuicon glyphicon glyphicon-user" tooltip="Committee" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                </li>
+                <li class="list-group-item">
+                    <span class="menuicon glyphicon glyphicon-cloud" tooltip="Comments" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                </li>
+                <li class="list-group-item">
+                    <span class="menuicon glyphicon glyphicon-star" tooltip="Applicant" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                </li>
+                <li class="list-group-item">
+                    <span class="menuicon glyphicon glyphicon-question-sign" tooltip="Questions" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                </li>
+                <li class="list-group-item">
+                    <span class="menuicon glyphicon glyphicon-globe" tooltip="References" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                </li>
+                <li class="list-group-item">
+                    <span class="menuicon glyphicon glyphicon-yen" tooltip="Financial" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                </li>
+                <li class="list-group-item">
+                    <span class="menuicon glyphicon glyphicon-grain" tooltip="Crop" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                </li>
+                <li class="list-group-item">
+                    <span class="menuicon glyphicon glyphicon-apple" tooltip="Farm" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                </li>
+                <li class="list-group-item">
+                    <span class="menuicon glyphicon glyphicon-scale" tooltip="Insurance" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                </li>
+                <li class="list-group-item">
+                    <span class="menuicon glyphicon glyphicon-piggy-bank" tooltip="Budget" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                </li>
+                <li class="list-group-item">
+                    <span class="menuicon glyphicon glyphicon-tasks" tooltip="Optimizer" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                </li>
+                <li class="list-group-item">
+                    <span class="menuicon glyphicon glyphicon-gbp" tooltip="Collateral" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                </li>
+                <li class="list-group-item">
+                    <span class="menuicon glyphicon glyphicon-paperclip" tooltip="Prerequisite" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                </li>
+                <li class="list-group-item">
+                    <span class="menuicon glyphicon glyphicon-tower" tooltip="Closing" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                </li>
+                <li class="list-group-item">
+                    <span class="menuicon glyphicon glyphicon-ice-lolly-tasted" tooltip="Disbursement" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                </li>
+                <li class="list-group-item">
+                    <span class="menuicon glyphicon glyphicon-sunglasses" tooltip="Audit" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                </li>
+            </ul>
+        </div>
+        <div ng-class="showSidebar ? 'col-xs-2' : 'hidden'" id="colPush" >
+            <ul class="list-group" style="padding:0;width:160px !important;">
+                <li class="list-group-item butt" ng-click="toggleSidebar()">
+                    <span class="menuicon glyphicon glyphicon-option-vertical" tooltip="Collapse" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                </li>
+                <li class="list-group-item active">
+                    <span class="menuicon glyphicon glyphicon-credit-card" tooltip="Summary" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                    &nbsp;Summary
+                </li>
+                <li class="list-group-item">
+                    <span class="menuicon glyphicon glyphicon-book" tooltip="Underwriting" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                    &nbsp;Underwriting
+                </li>
+                <li class="list-group-item">
+                    <span class="menuicon glyphicon glyphicon-lamp" tooltip="Terms" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                    &nbsp;Terms
+                </li>
+                <li class="list-group-item">
+                    <span class="menuicon glyphicon glyphicon-user" tooltip="Committee" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                    &nbsp;Committee
+                </li>
+                <li class="list-group-item">
+                    <span class="menuicon glyphicon glyphicon-cloud" tooltip="Comment" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                    &nbsp;Comment
+                </li>
+                <li class="list-group-item">
+                    <span class="menuicon glyphicon glyphicon-star" tooltip="Applicant" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                    &nbsp;Applicant
+                </li>
+                <li class="list-group-item">
+                    <span class="menuicon glyphicon glyphicon-question-sign" tooltip="Questions" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                    &nbsp;Questions
+                </li>
+                <li class="list-group-item">
+                    <span class="menuicon glyphicon glyphicon-globe" tooltip="References" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                    &nbsp;References
+                </li>
+                <li class="list-group-item">
+                    <span class="menuicon glyphicon glyphicon-yen" tooltip="Financial" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                    &nbsp;Financial&nbsp;
+        <span style="font-weight: normal; color: #000000;" >
+          [B-704]
+        </span>
+                </li>
+                <li class="list-group-item">
+                    <span class="menuicon glyphicon glyphicon-grain" tooltip="Crop" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                    &nbsp;Crop
+                </li>
+                <li class="list-group-item">
+                    <span class="menuicon glyphicon glyphicon-apple" tooltip="Farm" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                    &nbsp;Farm
+                </li>
+                <li class="list-group-item">
+                    <span class="menuicon glyphicon glyphicon-scale" tooltip="Insurance" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                    &nbsp;Insurance
+                </li>
+                <li class="list-group-item">
+                    <span class="menuicon glyphicon glyphicon-piggy-bank" tooltip="Budget" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                    &nbsp;Budget
+                </li>
+                <li class="list-group-item">
+                    <span class="menuicon glyphicon glyphicon-tasks" tooltip="Optimizer" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                    &nbsp;Optimizer
+                </li>
+                <li class="list-group-item">
+                    <span class="menuicon glyphicon glyphicon-gbp" tooltip="Collateral" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                    &nbsp;Collateral
+                </li>
+                <li class="list-group-item">
+                    <span class="menuicon glyphicon glyphicon-paperclip" tooltip="Prerequisite" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                    &nbsp;Prerequisite
+                </li>
+                <li class="list-group-item">
+                    <span class="menuicon glyphicon glyphicon-tower" tooltip="Closing" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                    &nbsp;Closing
+                </li>
+                <li class="list-group-item">
+                    <span class="menuicon glyphicon glyphicon-ice-lolly-tasted" tooltip="Disbursement" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                    &nbsp;Disbursement
+                </li>
+                <li class="list-group-item">
+                    <span class="menuicon glyphicon glyphicon-sunglasses" tooltip="Audit" tooltip-append-to-body="true" tooltip-placement="right"></span>
+                    &nbsp;Audit
+                </li>
+            </ul>
+        </div>
+        <div ng-class="showSidebar ? 'col-xs-10' : 'col-xs-11'"  id="colMain" style="margin-left: -48px;" >
+            <div style="height: 500px;" ag-grid="gridOptions" class="ag-fresh"></div>
+        </div>
     </div>
-    <div ng-class="showSidebar ? 'col-xs-2' : 'hidden'" id="colPush" >
-        <ul class="list-group" style="padding:0;width:160px !important;">
-            <li class="list-group-item butt" ng-click="toggleSidebar()">
-                <span class="menuicon glyphicon glyphicon-option-vertical" tooltip="Collapse" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-            </li>
-            <li class="list-group-item">
-                <span class="menuicon glyphicon glyphicon-credit-card" tooltip="Summary" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-                &nbsp;Summary
-            </li>
-            <li class="list-group-item">
-                <span class="menuicon glyphicon glyphicon-book" tooltip="Underwriting" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-                &nbsp;Underwriting
-            </li>
-            <li class="list-group-item">
-                <span class="menuicon glyphicon glyphicon-lamp" tooltip="Terms" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-                &nbsp;Terms
-            </li>
-            <li class="list-group-item">
-                <span class="menuicon glyphicon glyphicon-user" tooltip="Committee" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-                &nbsp;Committee
-            </li>
-            <li class="list-group-item">
-                <span class="menuicon glyphicon glyphicon-cloud" tooltip="Comment" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-                &nbsp;Comment
-            </li>
-            <li class="list-group-item">
-                <span class="menuicon glyphicon glyphicon-star" tooltip="Applicant" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-                &nbsp;Applicant
-            </li>
-            <li class="list-group-item">
-                <span class="menuicon glyphicon glyphicon-question-sign" tooltip="Questions" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-                &nbsp;Questions
-            </li>
-            <li class="list-group-item">
-                <span class="menuicon glyphicon glyphicon-globe" tooltip="References" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-                &nbsp;References
-            </li>
-            <li class="list-group-item">
-                <span class="menuicon glyphicon glyphicon-yen" tooltip="Financial" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-                &nbsp;Financial
-            </li>
-            <li class="list-group-item">
-                <span class="menuicon glyphicon glyphicon-grain" tooltip="Crop" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-                &nbsp;Crop
-            </li>
-            <li class="list-group-item">
-                <span class="menuicon glyphicon glyphicon-apple" tooltip="Farm" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-                &nbsp;Farm
-            </li>
-            <li class="list-group-item">
-                <span class="menuicon glyphicon glyphicon-scale" tooltip="Insurance" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-                &nbsp;Insurance
-            </li>
-            <li class="list-group-item">
-                <span class="menuicon glyphicon glyphicon-piggy-bank" tooltip="Budget" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-                &nbsp;Budget
-            </li>
-            <li class="list-group-item">
-                <span class="menuicon glyphicon glyphicon-tasks" tooltip="Optimizer" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-                &nbsp;Optimizer
-            </li>
-            <li class="list-group-item">
-                <span class="menuicon glyphicon glyphicon-gbp" tooltip="Collateral" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-                &nbsp;Collateral
-            </li>
-            <li class="list-group-item">
-                <span class="menuicon glyphicon glyphicon-paperclip" tooltip="Prerequisites" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-                &nbsp;Prerequisites
-            </li>
-            <li class="list-group-item">
-                <span class="menuicon glyphicon glyphicon-tower" tooltip="Closing" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-                &nbsp;Closing
-            </li>
-            <li class="list-group-item">
-                <span class="menuicon glyphicon glyphicon-ice-lolly-tasted" tooltip="Disbursements" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-                &nbsp;Disbursements
-            </li>
-            <li class="list-group-item">
-                <span class="menuicon glyphicon glyphicon-sunglasses" tooltip="Audit" tooltip-append-to-body="true" tooltip-placement="bottom"></span>
-                &nbsp;Audit
-            </li>
-        </ul>
-    </div>
-    <div ng-class="showSidebar ? 'col-xs-10' : 'col-xs-11'"  id="colMain" style="margin-left: -48px;" >
-        <div style="height: 500px;" ag-grid="gridOptions" class="ag-fresh"></div>
-    </div>
-</div>
 </body>
 </html>
